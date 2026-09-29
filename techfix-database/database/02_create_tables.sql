@@ -1,15 +1,8 @@
--- ============================================================
--- TECHFIX - CRIAÇÃO DAS TABELAS
--- Arquivo: 02_create_tables.sql
--- Banco: MySQL 8+
--- ============================================================
+
 
 USE techfix;
 
--- ============================================================
--- 1. CLIENTES
--- Armazena os dados das pessoas que utilizam os serviços.
--- ============================================================
+
 CREATE TABLE clientes (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -19,10 +12,7 @@ CREATE TABLE clientes (
     data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- ============================================================
--- 2. TÉCNICOS
--- Profissionais responsáveis pelo atendimento/manutenção.
--- ============================================================
+
 CREATE TABLE tecnicos (
     id_tecnico INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -32,11 +22,7 @@ CREATE TABLE tecnicos (
     ativo BOOLEAN DEFAULT TRUE
 );
 
--- ============================================================
--- 3. EQUIPAMENTOS
--- Cada equipamento pertence a um cliente.
--- Relacionamento: CLIENTES 1:N EQUIPAMENTOS.
--- ============================================================
+
 CREATE TABLE equipamentos (
     id_equipamento INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
@@ -53,10 +39,7 @@ CREATE TABLE equipamentos (
         ON DELETE RESTRICT
 );
 
--- ============================================================
--- 4. SERVIÇOS
--- Catálogo de serviços oferecidos pela assistência.
--- ============================================================
+
 CREATE TABLE servicos (
     id_servico INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -68,10 +51,6 @@ CREATE TABLE servicos (
         CHECK (preco >= 0)
 );
 
--- ============================================================
--- 5. PEÇAS
--- Produtos/peças utilizados nas ordens de serviço.
--- ============================================================
 CREATE TABLE pecas (
     id_peca INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -85,11 +64,7 @@ CREATE TABLE pecas (
         CHECK (preco >= 0)
 );
 
--- ============================================================
--- 6. ORDENS DE SERVIÇO
--- Registra cada atendimento realizado para um equipamento.
--- Um técnico pode atender várias ordens.
--- ============================================================
+
 CREATE TABLE ordens_servico (
     id_ordem INT AUTO_INCREMENT PRIMARY KEY,
     id_equipamento INT NOT NULL,
@@ -120,12 +95,7 @@ CREATE TABLE ordens_servico (
         ON DELETE SET NULL
 );
 
--- ============================================================
--- 7. ORDEM_SERVICO_SERVICOS
--- Tabela associativa do relacionamento N:N entre ordens e serviços.
--- Uma ordem pode possuir vários serviços e um serviço pode aparecer
--- em várias ordens.
--- ============================================================
+
 CREATE TABLE ordem_servico_servicos (
     id_ordem INT NOT NULL,
     id_servico INT NOT NULL,
@@ -152,10 +122,7 @@ CREATE TABLE ordem_servico_servicos (
         CHECK (valor_unitario >= 0)
 );
 
--- ============================================================
--- 8. ORDEM_SERVICO_PECAS
--- Tabela associativa do relacionamento N:N entre ordens e peças.
--- ============================================================
+
 CREATE TABLE ordem_servico_pecas (
     id_ordem INT NOT NULL,
     id_peca INT NOT NULL,
@@ -182,11 +149,7 @@ CREATE TABLE ordem_servico_pecas (
         CHECK (valor_unitario >= 0)
 );
 
--- ============================================================
--- 9. PAGAMENTOS
--- Registra pagamentos relacionados às ordens de serviço.
--- Uma ordem pode ter nenhum, um ou vários pagamentos.
--- ============================================================
+
 CREATE TABLE pagamentos (
     id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
     id_ordem INT NOT NULL,
