@@ -1,14 +1,7 @@
--- ============================================================
--- TECHFIX - DADOS DE EXEMPLO
--- Arquivo: 03_insert_data.sql
--- Banco: MySQL 8+
--- ============================================================
+
 
 USE techfix;
 
--- ============================================================
--- CLIENTES
--- ============================================================
 INSERT INTO clientes (nome, email, telefone, cidade) VALUES
 ('João da Silva', 'joao.silva@email.com', '(38) 99999-1001', 'Diamantina'),
 ('Maria Oliveira', 'maria.oliveira@email.com', '(38) 99999-1002', 'Diamantina'),
@@ -21,9 +14,6 @@ INSERT INTO clientes (nome, email, telefone, cidade) VALUES
 ('Pedro Henrique', 'pedro.henrique@email.com', '(38) 99999-1009', 'Gouveia'),
 ('Camila Rocha', 'camila.rocha@email.com', '(38) 99999-1010', 'Diamantina');
 
--- ============================================================
--- TÉCNICOS
--- ============================================================
 INSERT INTO tecnicos (nome, especialidade, email, telefone) VALUES
 ('André Martins', 'Hardware', 'andre@techfix.com', '(38) 98888-2001'),
 ('Beatriz Souza', 'Software', 'beatriz@techfix.com', '(38) 98888-2002'),
@@ -31,9 +21,6 @@ INSERT INTO tecnicos (nome, especialidade, email, telefone) VALUES
 ('Marcos Oliveira', 'Eletrônica', 'marcos@techfix.com', '(38) 98888-2004'),
 ('Patrícia Lima', 'Hardware e Software', 'patricia@techfix.com', '(38) 98888-2005');
 
--- ============================================================
--- EQUIPAMENTOS
--- ============================================================
 INSERT INTO equipamentos (id_cliente, tipo, marca, modelo, numero_serie) VALUES
 (1, 'Notebook', 'Dell', 'Inspiron 15 3000', 'DELL001'),
 (2, 'Smartphone', 'Samsung', 'Galaxy S22', 'SAM002'),
@@ -48,9 +35,6 @@ INSERT INTO equipamentos (id_cliente, tipo, marca, modelo, numero_serie) VALUES
 (1, 'Desktop', 'Dell', 'OptiPlex 3080', 'DELL011'),
 (5, 'Notebook', 'HP', '15-DY', 'HP012');
 
--- ============================================================
--- SERVIÇOS
--- ============================================================
 INSERT INTO servicos (nome, descricao, preco) VALUES
 ('Formatação', 'Formatação completa e preparação do equipamento', 120.00),
 ('Instalação de Sistema', 'Instalação e configuração do sistema operacional', 100.00),
@@ -61,9 +45,7 @@ INSERT INTO servicos (nome, descricao, preco) VALUES
 ('Manutenção Preventiva', 'Revisão geral e prevenção de falhas', 180.00),
 ('Recuperação de Dados', 'Tentativa de recuperação de arquivos', 300.00);
 
--- ============================================================
--- PEÇAS
--- ============================================================
+
 INSERT INTO pecas (nome, codigo, estoque, preco) VALUES
 ('SSD 480GB', 'SSD480', 15, 280.00),
 ('SSD 1TB', 'SSD1TB', 10, 450.00),
@@ -76,9 +58,7 @@ INSERT INTO pecas (nome, codigo, estoque, preco) VALUES
 ('Pasta Térmica', 'PASTA01', 30, 35.00),
 ('Fonte Notebook Universal', 'FONTEUNI', 7, 150.00);
 
--- ============================================================
--- ORDENS DE SERVIÇO
--- ============================================================
+
 INSERT INTO ordens_servico
 (id_equipamento, id_tecnico, problema, diagnostico, status, data_abertura, data_conclusao)
 VALUES
@@ -98,10 +78,7 @@ VALUES
 (5, 4, 'Tela com linhas e falhas', 'Necessidade de substituição do display', 'EM_MANUTENCAO', '2025-10-15 13:30:00', NULL),
 (7, 5, 'Arquivos importantes apagados', 'Tentativa de recuperação de dados', 'CONCLUIDA', '2025-10-16 08:30:00', '2025-10-18 17:00:00');
 
--- ============================================================
--- SERVIÇOS POR ORDEM
--- A tabela registra também o valor praticado no momento da ordem.
--- ============================================================
+
 INSERT INTO ordem_servico_servicos (id_ordem, id_servico, quantidade, valor_unitario) VALUES
 (1, 3, 1, 80.00),
 (2, 4, 1, 250.00),
@@ -121,9 +98,7 @@ INSERT INTO ordem_servico_servicos (id_ordem, id_servico, quantidade, valor_unit
 (14, 4, 1, 250.00),
 (15, 8, 1, 300.00);
 
--- ============================================================
--- PEÇAS POR ORDEM
--- ============================================================
+
 INSERT INTO ordem_servico_pecas (id_ordem, id_peca, quantidade, valor_unitario) VALUES
 (1, 5, 1, 350.00),
 (1, 9, 1, 35.00),
@@ -138,11 +113,7 @@ INSERT INTO ordem_servico_pecas (id_ordem, id_peca, quantidade, valor_unitario) 
 (14, 6, 1, 520.00),
 (15, 1, 1, 280.00);
 
--- ============================================================
--- PAGAMENTOS
--- Algumas ordens propositalmente não possuem pagamento para
--- permitir demonstrar LEFT JOIN e IS NULL.
--- ============================================================
+
 INSERT INTO pagamentos (id_ordem, valor, forma_pagamento, data_pagamento) VALUES
 (1, 465.00, 'PIX', '2025-10-03 16:30:00'),
 (2, 1030.00, 'CARTAO_CREDITO', '2025-10-05 14:30:00'),
